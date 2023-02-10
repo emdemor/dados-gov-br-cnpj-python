@@ -1,6 +1,7 @@
 BASE_URL = "http://200.152.38.155/CNPJ/"
 
-PATH_ZIP_DIRECTORY = "data/raw/zip"
+PATH_ZIP_DIRECTORY = "datasets/raw/zip"
+PATH_PARQUET_DIRECTORY = "datasets/raw/parquet"
 
 DATABASE_TYPES = [
     "Cnaes",
