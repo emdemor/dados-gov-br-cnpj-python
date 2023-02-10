@@ -1,4 +1,6 @@
-data/
+datasets/raw/*
+datasets/interim/*
+datasets/processed/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
