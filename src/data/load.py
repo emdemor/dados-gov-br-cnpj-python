@@ -5,6 +5,7 @@ import requests
 import zipfile
 from basix import files
 from bs4 import BeautifulSoup
+from datetime import datetime
 from loguru import logger
 from typing import Dict
 from typing import Generator
@@ -157,3 +158,12 @@ def read_csv_within_zip(zip_filepath: str) -> pd.DataFrame:
             )
 
     return dataframe
+
+def get_current_timestamp():
+    return datetime.strftime(datetime.today(), "%Y%m%d")
+
+def add_date(df: pd.DataFrame, timestamp: str) -> pd.DataFrame:
+    
+    df["creation_date"] = timestamp
+    
+    return df
