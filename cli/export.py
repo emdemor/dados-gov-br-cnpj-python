@@ -60,6 +60,30 @@ def get_names(est, emp, lab):
         'cnpj': 'string',
         'nome_fantasia': 'string',
         'razao_social': 'string',
+    }
+    
+    merged = (
+        df_est.merge(df_emp, on="cnpj_base", how="inner", suffixes=("", "_duplicated"))
+        .pipe(create_cnpj)
+        .pipe(select_columns, columns = list(column_types.keys()))
+        .pipe(format_columns, column_types=column_types)
+    )
+
+    local = f"datasets/interim/parquet/Names/part-{str(lab).zfill(6)}.parquet"
+
+    parquet.write(merged, local, overwrite=True)
+
+
+def get_summary(est, emp, lab):
+    
+    df_est = pd.read_parquet(est)
+    df_emp = pd.read_parquet(emp)
+
+
+    column_types = {
+        'cnpj': 'string',
+        'nome_fantasia': 'string',
+        'razao_social': 'string',
         'cd_cnae_principal': 'string',
         'porte_empresa': "Int32",
         'natureza_juridica': "Int32",
